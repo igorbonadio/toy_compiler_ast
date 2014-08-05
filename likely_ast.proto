@@ -11,7 +11,21 @@ message ImportPackage {
 }
 
 message Expression {
-  required uint32 type_code = 1;
+  enum ExpressionType {
+    BUILTIN = 0;
+    ATTRIBUTION = 1;
+    BINARY_OPERATION = 2;
+    FUNCTION_CALL = 3;
+    RETURN_OPERATOR = 4;
+    OBJECT_MESSAGE = 5;
+    IF_EXPRESSION = 6;
+    FOR_EXPRESSION = 7;
+    WHILE_EXPRESSION = 8;
+    FUNCTION_DEFINITION = 9;
+    ID = 10;
+  }
+
+  required ExpressionType type_code = 1;
   optional Builtin builtin = 2;
   optional Attribution attribution = 3;
   optional BinaryOperation binary_operation = 4;
@@ -26,7 +40,17 @@ message Expression {
 }
 
 message Builtin {
-  required uint32 type_code = 1;
+  enum BuiltinType {
+    INTEGER_NUMBER = 0;
+    REAL_NUMBER = 1;
+    STRING = 2;
+    BOOLEAN = 3;
+    SEQUENCE = 4;
+    HASH_MAP = 5;
+    PAIR = 6;
+  }
+
+  required BuiltinType type_code = 1;
   optional int64 integer_number = 2;
   optional double real_number = 3;
   optional string str = 4;
