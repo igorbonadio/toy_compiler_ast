@@ -1,3 +1,5 @@
+option java_package = "br.com.igorbonadio.likely.lklast";
+
 message Program {
   repeated ImportPackage imported_packages = 1;
   repeated Expression statements = 2;
