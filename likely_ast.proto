@@ -64,13 +64,27 @@ message Pair {
 }
 
 message Attribution {
-  required string id = 1;
+  required Expression id = 1;
   required Expression value = 2;
 }
 
 message BinaryOperation {
-  required Expression lhs = 1;
-  required Expression rhs = 2;
+  enum OperationType {
+    ADD = 0;
+    SUB = 1;
+    MUL = 2;
+    DIV = 3;
+    EQL = 4;
+    NEQ = 5;
+    GEQ = 6;
+    LEQ = 7;
+    GRE = 8;
+    LES = 9;
+    STH = 10;
+  }
+  required int32 operation = 1;
+  required Expression lhs = 2;
+  required Expression rhs = 3;
 }
 
 message FunctionCall {
