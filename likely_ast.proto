@@ -42,7 +42,7 @@ message Expression {
 message Builtin {
   enum BuiltinType {
     INTEGER = 0;
-    REAL_NUMBER = 1;
+    REAL = 1;
     STRING = 2;
     BOOLEAN = 3;
     SEQUENCE = 4;
@@ -52,9 +52,9 @@ message Builtin {
 
   required BuiltinType type_code = 1;
   optional int64 integer = 2;
-  optional double real_number = 3;
-  optional string str = 4;
-  optional bool b = 5;
+  optional double real = 3;
+  optional string string = 4;
+  optional bool boolean = 5;
   repeated Expression sequence = 6;
   repeated Pair hash_map = 7;
   optional Pair pair = 8;
