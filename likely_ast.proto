@@ -46,8 +46,7 @@ message Builtin {
     STRING = 2;
     BOOLEAN = 3;
     SEQUENCE = 4;
-    HASH_MAP = 5;
-    PAIR = 6;
+    PAIR = 5;
   }
 
   required BuiltinType type_code = 1;
@@ -56,8 +55,7 @@ message Builtin {
   optional string string = 4;
   optional bool boolean = 5;
   repeated Expression sequence = 6;
-  repeated Pair hash_map = 7;
-  optional Pair pair = 8;
+  optional Pair pair = 7;
 }
 
 message Pair {
