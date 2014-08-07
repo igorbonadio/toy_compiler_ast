@@ -30,7 +30,7 @@ message Expression {
   optional Attribution attribution = 3;
   optional BinaryOperation binary_operation = 4;
   optional FunctionCall function_call = 5;
-  optional ReturnOperation return_operator = 6;
+  optional Expression return_operator = 6;
   optional ObjectMessage object_message = 7;
   optional IfExpression if_expression = 8;
   optional ForExpression for_expression = 9;
@@ -90,10 +90,6 @@ message BinaryOperation {
 message FunctionCall {
   required Expression function = 1;
   repeated Expression arguments = 2;
-}
-
-message ReturnOperation {
-  required Expression value = 1;
 }
 
 message ObjectMessage {
