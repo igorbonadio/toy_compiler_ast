@@ -11,111 +11,56 @@ message ImportPackage {
 }
 
 message Expression {
-  enum ExpressionType {
-    BUILTIN = 0;
-    ATTRIBUTION = 1;
-    BINARY_OPERATION = 2;
-    FUNCTION_CALL = 3;
-    RETURN_OPERATOR = 4;
-    OBJECT_MESSAGE = 5;
-    IF_EXPRESSION = 6;
-    FOR_EXPRESSION = 7;
-    WHILE_EXPRESSION = 8;
-    FUNCTION_DEFINITION = 9;
-    ID = 10;
+  enum Type {
+    ID                       = 0; // Expression{string}
+
+    INTEGER                  = 1;  // Expression{integer}
+    REAL                     = 2;  // Expression{real}
+    STRING                   = 3;  // Expression{string}
+    BOOLEAN                  = 4;  // Expression{boolean}
+
+    SEQUENCE                 = 5;  // Expression{list_of_expressions}
+    HASH                     = 6;  // Expression{list_of_expressions}
+    PAIR                     = 7;  // Expression{lhs, rhs}
+
+    ATTRIBUTION              = 8;  // Expression{lhs, rhs}
+
+    ADDITION                 = 9;  // Expression{lhs, rhs}
+    SUBTRACTION              = 10; // Expression{lhs, rhs}
+    MULTIPLICATION           = 11; // Expression{lhs, rhs}
+    DIVISION                 = 12; // Expression{lhs, rhs}
+
+    EQUAL_TO                 = 13; // Expression{lhs, rhs}
+    NOT_EQUAL_TO             = 14; // Expression{lhs, rhs}
+    GREATER_THAN             = 15; // Expression{lhs, rhs}
+    GREATER_THAN_OR_EQUAL_TO = 16; // Expression{lhs, rhs}
+    LESS_THAN                = 17; // Expression{lhs, rhs}
+    LESS_THAN_OR_EQUAL_TO    = 18; // Expression{lhs, rhs}
+
+    AND                      = 19; // Expression{lhs, rhs}
+    OR                       = 20; // Expression{lhs, rhs}
+    NOT                      = 21; // Expression{rhs}
+
+    FUNCTION_DEFINITION      = 22; // Expression{list_of_string, block1}
+    FUNCTION_CALL            = 23; // Expression{lhs, list_of_expressions}
+    RETURN                   = 24; // Expression{rhs}
+
+    OBJECT_MESSAGE           = 25; // Expression{lhs, string}
+
+    IF                       = 26; // Expression{rhs, block1, block2}
+    FOR                      = 27; // Expression{string, lhs, rhs, block1}
+    WHILE                    = 28; // Expression{rhs, block1}
   }
 
-  required ExpressionType type_code = 1;
-  optional Builtin builtin = 2;
-  optional Attribution attribution = 3;
-  optional BinaryOperation binary_operation = 4;
-  optional FunctionCall function_call = 5;
-  optional Expression return_operator = 6;
-  optional ObjectMessage object_message = 7;
-  optional IfExpression if_expression = 8;
-  optional ForExpression for_expression = 9;
-  optional WhileExpression while_expression = 10;
-  optional FunctionDefinition function_definition = 11;
-  optional string id = 12;
-}
-
-message Builtin {
-  enum BuiltinType {
-    INTEGER = 0;
-    REAL = 1;
-    STRING = 2;
-    BOOLEAN = 3;
-    SEQUENCE = 4;
-    PAIR = 5;
-  }
-
-  required BuiltinType type_code = 1;
-  optional int64 integer = 2;
-  optional double real = 3;
-  optional string string = 4;
-  optional bool boolean = 5;
-  repeated Expression sequence = 6;
-  optional Pair pair = 7;
-}
-
-message Pair {
-  required Expression key = 1;
-  required Expression value = 2;
-}
-
-message Attribution {
-  required Expression id = 1;
-  required Expression value = 2;
-}
-
-message BinaryOperation {
-  enum OperationType {
-    ADD = 0;
-    SUB = 1;
-    MUL = 2;
-    DIV = 3;
-    EQL = 4;
-    NEQ = 5;
-    GEQ = 6;
-    LEQ = 7;
-    GRE = 8;
-    LES = 9;
-    STH = 10;
-  }
-  required int32 operation = 1;
-  required Expression lhs = 2;
-  required Expression rhs = 3;
-}
-
-message FunctionCall {
-  required Expression function = 1;
-  repeated Expression arguments = 2;
-}
-
-message ObjectMessage {
-  required Expression object = 1;
-  required string message = 2;
-}
-
-message IfExpression {
-  required Expression condition = 1;
-  repeated Expression true_statements = 2;
-  repeated Expression false_statements = 3;
-}
-
-message ForExpression {
-  required string variable = 1;
-  required Expression lower_bound = 2;
-  required Expression upper_bound = 3;
-  repeated Expression statements = 4;
-}
-
-message WhileExpression {
-  required Expression condition = 1;
-  repeated Expression statements = 2;
-}
-
-message FunctionDefinition {
-  repeated string parameters = 1;
-  repeated Expression statements = 2;
+  required Type type                      = 1;
+  optional int64 integer                  = 2;
+  optional double real                    = 3;
+  optional string string                  = 4;
+  optional bool booelan                   = 5;
+  repeated Expression list_of_expressions = 6;
+  optional Expression lhs                 = 7;
+  optional Expression rhs                 = 8;
+  repeated string list_of_string          = 9;
+  repeated Expression block1              = 10;
+  repeated Expression block2              = 11;
 }
