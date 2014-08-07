@@ -56,7 +56,7 @@ message Expression {
   optional int64 integer                  = 2;
   optional double real                    = 3;
   optional string string                  = 4;
-  optional bool booelan                   = 5;
+  optional bool boolean                   = 5;
   repeated Expression list_of_expressions = 6;
   optional Expression lhs                 = 7;
   optional Expression rhs                 = 8;
