@@ -12,44 +12,46 @@ message ImportPackage {
 
 message Expression {
   enum Type {
-    ID                       = 0; // Expression{string}
+    ID                       = 0; // Expression{string}                        = {name}
 
-    INTEGER                  = 1;  // Expression{integer}
-    REAL                     = 2;  // Expression{real}
-    STRING                   = 3;  // Expression{string}
-    BOOLEAN                  = 4;  // Expression{boolean}
+    INTEGER                  = 1;  // Expression{integer}                      = {number}
+    REAL                     = 2;  // Expression{real}                         = {number}
+    STRING                   = 3;  // Expression{string}                       = {text}
+    BOOLEAN                  = 4;  // Expression{boolean}                      = {boolean}
 
-    SEQUENCE                 = 5;  // Expression{block_true}
-    HASH                     = 6;  // Expression{block_true}
-    PAIR                     = 7;  // Expression{lhs, rhs}
+    SEQUENCE                 = 5;  // Expression{block_true}                   = {sequence}
+    HASH                     = 6;  // Expression{block_true}                   = {sequence_of_pairs}
+    PAIR                     = 7;  // Expression{lhs, rhs}                     = {key, value}
 
-    ATTRIBUTION              = 8;  // Expression{lhs, rhs}
+    ATTRIBUTION              = 8;  // Expression{lhs, rhs}                     = {container, value}
 
-    ADDITION                 = 9;  // Expression{lhs, rhs}
-    SUBTRACTION              = 10; // Expression{lhs, rhs}
-    MULTIPLICATION           = 11; // Expression{lhs, rhs}
-    DIVISION                 = 12; // Expression{lhs, rhs}
+    ADDITION                 = 9;  // Expression{lhs, rhs}                     = {a, b}
+    SUBTRACTION              = 10; // Expression{lhs, rhs}                     = {a, b}
+    MULTIPLICATION           = 11; // Expression{lhs, rhs}                     = {a, b}
+    DIVISION                 = 12; // Expression{lhs, rhs}                     = {a, b}
 
-    EQUAL_TO                 = 13; // Expression{lhs, rhs}
-    NOT_EQUAL_TO             = 14; // Expression{lhs, rhs}
-    GREATER_THAN             = 15; // Expression{lhs, rhs}
-    GREATER_THAN_OR_EQUAL_TO = 16; // Expression{lhs, rhs}
-    LESS_THAN                = 17; // Expression{lhs, rhs}
-    LESS_THAN_OR_EQUAL_TO    = 18; // Expression{lhs, rhs}
+    EQUAL_TO                 = 13; // Expression{lhs, rhs}                     = {a, b}
+    NOT_EQUAL_TO             = 14; // Expression{lhs, rhs}                     = {a, b}
+    GREATER_THAN             = 15; // Expression{lhs, rhs}                     = {a, b}
+    GREATER_THAN_OR_EQUAL_TO = 16; // Expression{lhs, rhs}                     = {a, b}
+    LESS_THAN                = 17; // Expression{lhs, rhs}                     = {a, b}
+    LESS_THAN_OR_EQUAL_TO    = 18; // Expression{lhs, rhs}                     = {a, b}
 
-    AND                      = 19; // Expression{lhs, rhs}
-    OR                       = 20; // Expression{lhs, rhs}
-    NOT                      = 21; // Expression{rhs}
+    AND                      = 19; // Expression{lhs, rhs}                     = {a, b}
+    OR                       = 20; // Expression{lhs, rhs}                     = {a, b}
+    NOT                      = 21; // Expression{rhs}                          = {a}
 
-    FUNCTION_DEFINITION      = 22; // Expression{strings, block_true}
-    FUNCTION_CALL            = 23; // Expression{lhs, block_true}
-    RETURN                   = 24; // Expression{rhs}
+    FUNCTION_DEFINITION      = 22; // Expression{strings, block_true}          = {parameters, statements}
+    FUNCTION_CALL            = 23; // Expression{lhs, block_true, block_false} = {name, arguments, constructor_block}
+    RETURN                   = 24; // Expression{rhs}                          = {value}
 
-    OBJECT_MESSAGE           = 25; // Expression{lhs, string}
+    OBJECT_MESSAGE           = 25; // Expression{lhs, string}                  = {object, message}
 
-    IF                       = 26; // Expression{rhs, block_true, block_false}
-    FOR                      = 27; // Expression{string, lhs, rhs, block_true}
-    WHILE                    = 28; // Expression{rhs, block_true}
+    IF                       = 26; // Expression{rhs, block_true, block_false} = {condition, block_true, block_false}
+    FOR                      = 27; // Expression{string, lhs, rhs, block_true} = {variable, lower_bound, upper_bound, block}
+    WHILE                    = 28; // Expression{rhs, block_true}              = {condition, block}
+
+    PROBABILITY              = 29; // Expression{block_true, block_false, rhs} = {joint_variables, conditional_variables, value}
   }
 
   required Type type              = 1;
