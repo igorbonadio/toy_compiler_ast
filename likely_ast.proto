@@ -19,8 +19,8 @@ message Expression {
     STRING                   = 3;  // Expression{string}
     BOOLEAN                  = 4;  // Expression{boolean}
 
-    SEQUENCE                 = 5;  // Expression{expressions}
-    HASH                     = 6;  // Expression{expressions}
+    SEQUENCE                 = 5;  // Expression{block_true}
+    HASH                     = 6;  // Expression{block_true}
     PAIR                     = 7;  // Expression{lhs, rhs}
 
     ATTRIBUTION              = 8;  // Expression{lhs, rhs}
@@ -41,15 +41,15 @@ message Expression {
     OR                       = 20; // Expression{lhs, rhs}
     NOT                      = 21; // Expression{rhs}
 
-    FUNCTION_DEFINITION      = 22; // Expression{strings, block1}
-    FUNCTION_CALL            = 23; // Expression{lhs, expressions}
+    FUNCTION_DEFINITION      = 22; // Expression{strings, block_true}
+    FUNCTION_CALL            = 23; // Expression{lhs, block_true}
     RETURN                   = 24; // Expression{rhs}
 
     OBJECT_MESSAGE           = 25; // Expression{lhs, string}
 
-    IF                       = 26; // Expression{rhs, block1, block2}
-    FOR                      = 27; // Expression{string, lhs, rhs, block1}
-    WHILE                    = 28; // Expression{rhs, block1}
+    IF                       = 26; // Expression{rhs, block_true, block_false}
+    FOR                      = 27; // Expression{string, lhs, rhs, block_true}
+    WHILE                    = 28; // Expression{rhs, block_true}
   }
 
   required Type type              = 1;
@@ -57,10 +57,9 @@ message Expression {
   optional double real            = 3;
   optional string string          = 4;
   optional bool boolean           = 5;
-  repeated Expression expressions = 6;
-  optional Expression lhs         = 7;
-  optional Expression rhs         = 8;
-  repeated string strings         = 9;
-  repeated Expression block1      = 10;
-  repeated Expression block2      = 11;
+  optional Expression lhs         = 6;
+  optional Expression rhs         = 7;
+  repeated string strings         = 8;
+  repeated Expression block_true  = 9;
+  repeated Expression block_false = 10;
 }
