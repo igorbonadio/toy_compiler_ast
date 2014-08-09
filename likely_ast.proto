@@ -19,8 +19,8 @@ message Expression {
     STRING                   = 3;  // Expression{string}                       = {text}
     BOOLEAN                  = 4;  // Expression{boolean}                      = {boolean}
 
-    SEQUENCE                 = 5;  // Expression{block_true}                   = {sequence}
-    HASH                     = 6;  // Expression{block_true}                   = {sequence_of_pairs}
+    SEQUENCE                 = 5;  // Expression{block1}                       = {sequence}
+    HASH                     = 6;  // Expression{block1}                       = {sequence_of_pairs}
     PAIR                     = 7;  // Expression{lhs, rhs}                     = {key, value}
 
     ATTRIBUTION              = 8;  // Expression{lhs, rhs}                     = {container, value}
@@ -41,17 +41,17 @@ message Expression {
     OR                       = 20; // Expression{lhs, rhs}                     = {a, b}
     NOT                      = 21; // Expression{rhs}                          = {a}
 
-    FUNCTION_DEFINITION      = 22; // Expression{strings, block_true}          = {parameters, statements}
-    FUNCTION_CALL            = 23; // Expression{lhs, block_true, block_false} = {name, arguments, constructor_block}
+    FUNCTION_DEFINITION      = 22; // Expression{strings1, block1}             = {parameters, statements}
+    FUNCTION_CALL            = 23; // Expression{lhs, block1, block2}          = {name, arguments, constructor_block}
     RETURN                   = 24; // Expression{rhs}                          = {value}
 
     OBJECT_MESSAGE           = 25; // Expression{lhs, string}                  = {object, message}
 
-    IF                       = 26; // Expression{rhs, block_true, block_false} = {condition, block_true, block_false}
-    FOR                      = 27; // Expression{string, lhs, rhs, block_true} = {variable, lower_bound, upper_bound, block}
-    WHILE                    = 28; // Expression{rhs, block_true}              = {condition, block}
+    IF                       = 26; // Expression{rhs, block1, block2}          = {condition, block1, block2}
+    FOR                      = 27; // Expression{string, lhs, rhs, block1}     = {variable, lower_bound, upper_bound, block}
+    WHILE                    = 28; // Expression{rhs, block1}                  = {condition, block}
 
-    PROBABILITY              = 29; // Expression{block_true, block_false, rhs} = {joint_variables, conditional_variables, value}
+    PROBABILITY              = 29; // Expression{strings1, string2, rhs}       = {joint_variables, conditional_variables, value}
   }
 
   required Type type              = 1;
@@ -61,7 +61,8 @@ message Expression {
   optional bool boolean           = 5;
   optional Expression lhs         = 6;
   optional Expression rhs         = 7;
-  repeated string strings         = 8;
-  repeated Expression block_true  = 9;
-  repeated Expression block_false = 10;
+  repeated string strings1        = 8;
+  repeated string strings2        = 9;
+  repeated Expression block1      = 10;
+  repeated Expression block2      = 11;
 }
