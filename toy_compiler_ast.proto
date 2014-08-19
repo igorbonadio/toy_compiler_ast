@@ -1,4 +1,4 @@
-option java_package = "br.com.igorbonadio.likely.lklast";
+option java_package = "br.com.igorbonadio.toy_compiler.ast";
 
 message Program {
   repeated ImportPackage imported_packages = 1;
